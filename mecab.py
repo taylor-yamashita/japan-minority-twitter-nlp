@@ -3,8 +3,7 @@ import MeCab
 
 mt = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
 
-# use our jan 2022 txt file 
-file = open('2022-all/2022-01.txt', 'r')
+file = open('test-tweets.txt', 'r')
 
 # we'll just test on a few tweets for now
 for i in range(5):
