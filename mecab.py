@@ -8,7 +8,7 @@ mt = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
 file = open('test-tweets.txt', 'r')
 
 # we'll just test on a few tweets for now
-for i in range(50):
+for i in range(40):
     # load tweet, convert to py dict, access content
     tweet_json = file.readline()
     tweet_py = json.loads(tweet_json)
