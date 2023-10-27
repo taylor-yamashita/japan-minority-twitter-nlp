@@ -8,7 +8,7 @@ mt = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
 file = open('test-tweets.txt', 'r')
 
 # we'll just test on a few tweets for now
-for i in range(10):
+for i in range(50):
     # load tweet, convert to py dict, access content
     tweet_json = file.readline()
     tweet_py = json.loads(tweet_json)
@@ -17,16 +17,17 @@ for i in range(10):
     # clean tweet content
     print("orig: ", tweet_text)
     remove_emojis = demoji.replace(tweet_text, "")
-    print("no emoji: ", remove_emojis)
+    # print("no emoji: ", remove_emojis)
 
     remove_usernames = re.sub("@([a-zA-Z0-9_]+)", "", remove_emojis)
-    print("no usernames: ", remove_usernames)
+    # print("no usernames: ", remove_usernames)
 
-    remove_hashtags = re.sub("#([a-zA-Z0-9_]+)", "", remove_usernames)
-    print("no hashtags: ", remove_hashtags)
+    remove_hashtags = re.sub("#([a-zA-Z0-9_ぁ-んァ-ン一-龠]+)", "", remove_usernames)
+    # print("no hashtags: ", remove_hashtags)
     
-    remove_links = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', "", remove_hashtags)
-    print("no links: ", remove_links)
+    remove_links = re.sub("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", "", remove_hashtags)
+    # print("no links: ", remove_links)
+    print("cleaned: ", remove_links, "\n")
 
     # mecab tokenization
     parsed = mt.parseToNode(remove_links)
@@ -34,4 +35,4 @@ for i in range(10):
     while parsed:
         components.append(parsed.surface)
         parsed = parsed.next
-    print(components, "\n")
+    # print(components, "\n")
