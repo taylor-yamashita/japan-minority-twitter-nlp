@@ -41,4 +41,9 @@ print(tweets)
 # set up logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-model = gensim.models.Word2Vec(tweets, min_count=5)
+# train word2vec
+model = gensim.models.Word2Vec(tweets, min_count=2)
+
+# check similarity given by trained model
+sim = model.wv.most_similar('今日')
+print(sim)
