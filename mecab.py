@@ -20,13 +20,19 @@ for i in range(100):
 
     # clean tweet content
     remove_emojis = demoji.replace(tweet_text, "")
-    remove_usernames = re.sub("@([a-zA-Z0-9_]+)", "", remove_emojis)
+    remove_more_emojis = re.sub("([\uD83E-\uD83E])+", "", remove_emojis)
+    remove_newlines = re.sub("(\n)+", "", remove_more_emojis)
+    remove_usernames = re.sub("@([a-zA-Z0-9_]+)", "", remove_newlines)
     remove_hashtags = re.sub("#([a-zA-Z0-9_ぁ-んァ-ン一-龠]+)", "", remove_usernames)
     remove_links = re.sub("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", "", remove_hashtags)
-    remove_punc = re.sub("([.,、、。…「」!！?？~〜@#$%^&*():\{\}\[\]\/\\\\]+)", "", remove_links)
+    remove_punc = re.sub("([-.,;\"\'!?~@#$%^&*():\{\}\[\]\/\\\\]+)", "", remove_links)
+    remove_jp_punc = re.sub("([\uFF01-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF40\uFF5B-\uFF65\uFF9E-\uFFEE\u3000-\u303F]+)", "", remove_punc)
+    remove_geo_shapes = re.sub("([\u25A0-\u25FF])+", "", remove_jp_punc)
+    remove_misc_symbols = re.sub("([\u2600-\u26FF])+", "", remove_geo_shapes)
+    # print("no punc: ", remove_punc)
 
     # mecab tokenization
-    parsed = mt.parseToNode(remove_punc)
+    parsed = mt.parseToNode(remove_misc_symbols)
     components = []
     while parsed:
         components.append(parsed.surface)
