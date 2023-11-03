@@ -19,9 +19,10 @@ for i in range(40):
     remove_usernames = re.sub("@([a-zA-Z0-9_]+)", "", remove_emojis)
     remove_hashtags = re.sub("#([a-zA-Z0-9_ぁ-んァ-ン一-龠]+)", "", remove_usernames)
     remove_links = re.sub("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", "", remove_hashtags)
+    remove_punc = re.sub("([.,、、。…「」!！?？~@#$%^&*():\{\}\[\]\/\\\\]+)", "", remove_links)
 
     # mecab tokenization
-    parsed = mt.parseToNode(remove_links)
+    parsed = mt.parseToNode(remove_punc)
     components = []
     while parsed:
         components.append(parsed.surface)
