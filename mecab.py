@@ -12,7 +12,7 @@ file = open('test-tweets.txt', 'r')
 
 # we'll just test on a few tweets for now
 tweets = []
-for i in range(40):
+for i in range(100):
     # load tweet, convert to py dict, access content
     tweet_json = file.readline()
     tweet_py = json.loads(tweet_json)
@@ -42,7 +42,7 @@ print(tweets)
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 # train word2vec
-model = gensim.models.Word2Vec(tweets, min_count=2)
+model = gensim.models.Word2Vec(tweets, min_count=3)
 
 # check similarity given by trained model
 sim = model.wv.most_similar('今日')
