@@ -2,6 +2,7 @@ import json
 import MeCab
 import demoji
 import re
+from stop_words import stop_words
 
 mt = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
 
@@ -27,4 +28,5 @@ for i in range(40):
     while parsed:
         components.append(parsed.surface)
         parsed = parsed.next
+    components = [token for token in components if not token in stop_words]
     print(components, "\n")
