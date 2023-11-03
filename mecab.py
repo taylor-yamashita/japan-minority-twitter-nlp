@@ -29,7 +29,6 @@ for i in range(100):
     remove_jp_punc = re.sub("([\uFF01-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF40\uFF5B-\uFF65\uFF9E-\uFFEE\u3000-\u303F]+)", "", remove_punc)
     remove_geo_shapes = re.sub("([\u25A0-\u25FF])+", "", remove_jp_punc)
     remove_misc_symbols = re.sub("([\u2600-\u26FF])+", "", remove_geo_shapes)
-    # print("no punc: ", remove_punc)
 
     # mecab tokenization
     parsed = mt.parseToNode(remove_misc_symbols)
@@ -40,7 +39,7 @@ for i in range(100):
     components = [token for token in components if not token in stop_words]
     tweets.append(components)
 
-print(tweets)
+# print(tweets)
 
 # word2vec
 
