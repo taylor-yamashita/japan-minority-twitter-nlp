@@ -1,4 +1,4 @@
 # thesis
 
-###requirements
+### requirements
 install MeCab, demoji, gensim via pipenv.
