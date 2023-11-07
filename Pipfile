@@ -7,6 +7,8 @@ name = "pypi"
 numpy = "*"
 jupyterlab = "*"
 demoji = "*"
+gensim = "*"
+mecab-python3 = "*"
 
 [dev-packages]
 ipykernel = "*"
