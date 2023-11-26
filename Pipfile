@@ -9,6 +9,7 @@ jupyterlab = "*"
 demoji = "*"
 gensim = "*"
 mecab-python3 = "*"
+twscrape = "*"
 
 [dev-packages]
 ipykernel = "*"
