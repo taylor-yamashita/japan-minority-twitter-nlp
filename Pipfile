@@ -12,6 +12,7 @@ mecab-python3 = "*"
 twscrape = "*"
 matplotlib = "*"
 scikit-learn = "*"
+mojimoji = "*"
 
 [dev-packages]
 ipykernel = "*"
