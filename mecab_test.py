@@ -7,6 +7,8 @@ from stopwords_ja import stop_words
 from stopwords_slothlib import stop_words_2
 import gensim, logging
 
+import pandas as pd
+
 # cleaning and tokenizing
 
 mt = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
@@ -14,6 +16,7 @@ file = open('test-tweets.txt', 'r')
 
 # we'll just test on a few tweets for now
 tweets = []
+pos = []
 for i in range(100):
     # load tweet, convert to py dict, access content
     tweet_json = file.readline()
@@ -55,11 +58,15 @@ for i in range(100):
     parsed = mt.parseToNode(text)
     components = []
     while parsed:
+        pos.append(type(parsed.feature))
         components.append(parsed.surface)
         parsed = parsed.next
     # components = [token for token in components if ((not token in stop_words) and (not token in stop_words_2))]
-    print(components)
+    # print(components)
     tweets.append(components)
+
+# print(pd.unique(pos))
+print(pos)
 
 # word2vec
 
