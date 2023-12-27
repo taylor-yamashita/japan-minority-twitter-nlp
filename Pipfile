@@ -13,6 +13,7 @@ twscrape = "*"
 matplotlib = "*"
 scikit-learn = "*"
 mojimoji = "*"
+pandas = "*"
 
 [dev-packages]
 ipykernel = "*"
