@@ -7,23 +7,17 @@ from stopwords_ja import stop_words
 from stopwords_slothlib import stop_words_2
 import gensim, logging
 
-import pandas as pd
-
 # cleaning and tokenizing
-
 mt = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
 file = open('test-tweets.txt', 'r')
 
 # we'll just test on a few tweets for now
 tweets = []
-pos = []
 for i in range(100):
     # load tweet, convert to py dict, access content
     tweet_json = file.readline()
     tweet_py = json.loads(tweet_json)
     text = tweet_py['rawContent'] # note: need other prop for over 140 char?
-
-    # print(text)
 
     # clean tweet content
     # from https://colab.research.google.com/drive/1bX-JyY4xmCm_RFkJg3QNcthUvEJaBghP
@@ -58,16 +52,18 @@ for i in range(100):
     parsed = mt.parseToNode(text)
     components = []
     while parsed:
-        pos.append(type(parsed.feature))
-        components.append(parsed.surface)
+        word = parsed.surface
+        pos = parsed.feature.split(",")[0]
+
+        # remove beg/end tokens, particles, fillers, auxiliary bound prefixes/endings
+        exclude_pos = ['BOS/EOS', '助詞', 'フィラー', '接頭詞', '助動詞']
+        if pos not in exclude_pos: components.append(word)
         parsed = parsed.next
-    # components = [token for token in components if ((not token in stop_words) and (not token in stop_words_2))]
-    # print(components)
+
+    # remove additional stopwords
+    components = [token for token in components if ((not token in stop_words) and (not token in stop_words_2))]
     tweets.append(components)
-
-# print(pd.unique(pos))
-print(pos)
-
+    
 # word2vec
 
 # set up logging
