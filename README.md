@@ -1,4 +1,4 @@
-# Code for Questioning “Japanese-ness”: A Holistic Analysis of Racism on Japanese Twitter
+## Questioning “Japanese-ness”: A Holistic Analysis of Racism on Japanese Twitter
 
 ### Requirements
 - Install requirements using the pipenv Pipfile. 
