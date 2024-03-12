@@ -1,11 +1,14 @@
-# thesis
+# Code for Questioning “Japanese-ness”: A Holistic Analysis of Racism on Japanese Twitter
 
-### requirements
-install MeCab, demoji, gensim, mojimoji via pipenv.
+### Requirements
+- Install requirements using the pipenv Pipfile. 
 
-### to load + use my pretrained word2vec models
+### To load + use my pretrained Word2Vec models:
 for model trained on 2015 tweet dataset: 
-`model = gensim.models.Word2Vec.load("thesis_w2v_2015_tweets")`
+`w2v = gensim.models.Word2Vec.load("thesis_w2v_2015_tweets")`
 
 for model trained on 2022 tweet dataset: 
-`model = gensim.models.Word2Vec.load("thesis_w2v_2022_tweets")`
+`w2v = gensim.models.Word2Vec.load("thesis_w2v_2022_tweets")`
+
+### To load + use my pretrained LDA (Latent Dirichlet Allocation) model:
+`lda = gensim.models.LdaModel.load("thesis_lda_model_2022")`
