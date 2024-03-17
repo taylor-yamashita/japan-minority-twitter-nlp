@@ -15,6 +15,7 @@ scikit-learn = "*"
 mojimoji = "*"
 pandas = "*"
 pyldavis = "*"
+import-ipynb = "*"
 
 [dev-packages]
 ipykernel = "*"
